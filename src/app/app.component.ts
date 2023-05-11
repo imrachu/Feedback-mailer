@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'feedbackMailer';
+
+  successModalRef: BsModalRef;
+  config: any = {
+    backdrop: 'static',
+    keyboard: false,
+    class: 'theme-modal',
+  };
+
+  constructor(
+    private modalService: BsModalService,
+  ) { }
+
+  openModal(
+    success_template: TemplateRef<any>
+  ) {
+    this.successModalRef = this.modalService.show(
+      success_template,
+      this.config
+    );
+  }
 }
